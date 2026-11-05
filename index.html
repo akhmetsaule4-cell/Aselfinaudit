@@ -1,0 +1,616 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Бухгалтерия 2026 — ТОО ОУР + НДС</title>
+<style>
+:root{
+  --bg:#f6f8fb;
+  --card:#fff;
+  --line:#cbd5e1;
+  --ink:#020617;
+  --mute:#334155;
+  --pri:#1d4ed8;
+  --warn:#b45309;
+  --bad:#b91c1c;
+  --ok:#047857;
+  --wa:#25D366;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0}
+body{font:15px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink);font-weight:500;padding-bottom:78px}
+header.top{background:#0f172a;color:#fff;padding:14px 16px}
+header.top b{display:block;font-size:16px;color:#fff}
+header.top span{font-size:12px;color:#e0e7ff}
+nav.tabs{display:none;background:#111c33;padding:8px 12px;gap:4px;overflow-x:auto;position:sticky;top:0;z-index:10}
+nav.tabs button{background:#1e293b;color:#e2e8f0;border:1px solid #334155;border-radius:8px;padding:8px 12px;font-size:13px;white-space:nowrap;cursor:pointer}
+nav.tabs button.active{background:var(--pri);color:#fff;border-color:var(--pri)}
+main{max-width:1120px;margin:0 auto;padding:14px}
+section{display:none}
+section.active{display:block}
+h2{font-size:20px;margin:4px 0 12px;color:var(--ink)}
+h3{font-size:16px;margin:18px 0 8px;color:var(--ink)}
+h4{font-size:14px;margin:0 0 6px;color:var(--ink)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px;margin-bottom:12px}
+.tbl-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+table{width:100%;border-collapse:collapse;font-size:13px;min-width:800px}
+th,td{border-bottom:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top;color:var(--ink)}
+th{background:#e0e7ff;position:sticky;top:0;z-index:1;font-weight:700;white-space:nowrap;color:#1e1b4b}
+tr:hover td{background:#f1f5f9}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:4px 0 12px;scrollbar-width:thin}
+.chip{flex:0 0 auto;border:1px solid var(--line);background:#fff;border-radius:999px;padding:7px 14px;font-size:13px;cursor:pointer;color:var(--ink);font-weight:500}
+.chip.active{background:var(--pri);color:#fff;border-color:var(--pri)}
+input.search{width:100%;border:1px solid var(--line);background:#fff;border-radius:10px;padding:10px 12px;font-size:14px;margin-bottom:10px;color:var(--ink)}
+.tag{display:inline-block;font-size:11px;padding:2px 8px;border-radius:999px;background:#e0e7ff;color:#3730a3;margin-right:4px;white-space:nowrap}
+.tag.warn{background:#fef3c7;color:#92400e}
+.tag.bad{background:#fee2e2;color:#991b1b}
+.tag.ok{background:#dcfce7;color:#166534}
+.mute{color:var(--mute)}
+.small{font-size:12px}
+ul{margin:6px 0 0 18px;padding:0}
+li{margin:4px 0}
+.kv{display:flex;justify-content:space-between;font-size:13px;padding:4px 0;border-bottom:1px dashed var(--line);gap:12px}
+.kv:last-child{border:0}
+.kv .k{color:var(--mute)}
+details{background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin-bottom:8px}
+details summary{cursor:pointer;font-weight:700;font-size:14px;color:var(--ink)}
+details[open] summary{margin-bottom:8px}
+nav.bottom{position:fixed;left:0;right:0;bottom:0;display:flex;background:#fff;border-top:1px solid var(--line);padding:6px 2px calc(6px + env(safe-area-inset-bottom));z-index:20}
+nav.bottom button{flex:1;background:none;border:0;font-size:10px;color:var(--mute);padding:5px 1px;cursor:pointer;line-height:1.1}
+nav.bottom button.active{color:var(--pri);font-weight:700}
+nav.bottom button i{display:block;font-style:normal;font-size:17px;margin-bottom:2px}
+
+.export-bar{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.btn-export{display:inline-flex;align-items:center;gap:6px;background:var(--pri);color:#fff;border:0;padding:10px 14px;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit}
+.btn-export.alt{background:#047857}
+.btn-export.ghost{background:#fff;color:var(--ink);border:1px solid var(--line)}
+.btn-export:hover{filter:brightness(1.05)}
+.btn-export:active{transform:scale(.98)}
+
+.date-cell{position:relative;white-space:nowrap;padding:6px 8px!important}
+input.dt{
+  border:1px solid transparent;
+  background:transparent;
+  color:var(--ink);
+  font:inherit;
+  font-weight:600;
+  padding:4px 6px;
+  border-radius:6px;
+  width:100%;
+  max-width:130px;
+  min-height:32px;
+  cursor:pointer;
+  -webkit-appearance:none;
+  appearance:none;
+}
+input.dt:hover{background:#eef2ff;border-color:var(--line)}
+input.dt:focus{outline:none;border-color:var(--pri);background:#fff;box-shadow:0 0 0 3px rgba(29,78,216,.18)}
+.date-cell .ovr{color:var(--pri);font-size:11px;margin-left:2px}
+
+.st-ok { font-size: 11px; color: var(--ok); font-weight: 700; margin-top: 2px; }
+.st-bad { font-size: 11px; color: var(--bad); font-weight: 700; margin-top: 2px; }
+.st-warn { font-size: 11px; color: var(--warn); font-weight: 700; margin-top: 2px; }
+.st-mute { font-size: 11px; color: var(--mute); margin-top: 2px; }
+
+.mark-btn{
+  background:transparent;
+  border:1.5px solid var(--line);
+  border-radius:6px;
+  width:30px;height:30px;
+  cursor:pointer;
+  font-size:15px;line-height:1;
+  color:var(--mute);
+  padding:0;
+  font-family:inherit;
+  transition:all .15s ease;
+}
+.mark-btn:hover{border-color:var(--pri);color:var(--pri);background:#eef2ff}
+.mark-btn.active{background:var(--ok);color:#fff;border-color:var(--ok)}
+.col-mark{width:44px;text-align:center}
+
+.wa-float{
+  position:fixed;
+  right:16px;
+  bottom:90px;
+  width:56px;height:56px;
+  background:var(--wa);
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 6px 16px rgba(37,211,102,.4), 0 2px 6px rgba(0,0,0,.15);
+  z-index:50;
+  text-decoration:none;
+  transition:transform .15s ease, box-shadow .15s ease;
+}
+.wa-float:hover{transform:scale(1.08);box-shadow:0 8px 20px rgba(37,211,102,.55), 0 3px 8px rgba(0,0,0,.2)}
+.wa-float:active{transform:scale(.96)}
+.wa-float .tip{
+  position:absolute;right:66px;top:50%;transform:translateY(-50%);
+  background:#0f172a;color:#fff;font-size:12px;font-weight:600;
+  padding:6px 10px;border-radius:8px;white-space:nowrap;
+  opacity:0;pointer-events:none;transition:opacity .15s ease;
+}
+.wa-float:hover .tip{opacity:1}
+
+@media(min-width:900px){
+  body{padding-bottom:20px}
+  nav.tabs{display:flex}
+  nav.bottom{display:none}
+  .wa-float{bottom:20px;right:20px}
+}
+@media(max-width:600px){
+  main{padding:10px}
+  h2{font-size:18px}
+  header.top b{font-size:15px}
+  table{font-size:12px;min-width:760px}
+  input.dt{max-width:110px;font-size:12px}
+  .wa-float{width:52px;height:52px;right:14px;bottom:86px}
+  .wa-float .tip{display:none}
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <b>Бухгалтерия 2026 — ТОО на ОУР</b>
+  <span>Плательщик НДС · есть работники · НК РК 214-VIII ЗРК · ИСНА</span>
+</header>
+
+<nav class="tabs" id="topTabs"></nav>
+
+<main>
+
+<!-- 1. КАЛЕНДАРЬ -->
+<section id="s1" class="active">
+  <h2>Налоговый календарь 2026</h2>
+  <div class="export-bar">
+    <button class="btn-export" onclick="exportExcel()">📊 Скачать Excel</button>
+    <button class="btn-export alt" onclick="exportWord()">📄 Скачать Word</button>
+    <button class="btn-export ghost" onclick="resetOverrides()">↺ Сбросить правки</button>
+  </div>
+  <input class="search" id="search" placeholder="Поиск: НДС, КПН, 300.00, май…">
+  <div class="chips" id="chips"></div>
+  <div class="card" style="padding:0">
+    <div class="tbl-wrap">
+      <table id="calTable">
+        <thead><tr>
+          <th>№</th><th>Обязательство</th><th>Форма</th><th>Период</th>
+          <th>Дата сдачи</th><th>Дата уплаты</th><th>Тип</th><th class="col-mark" title="Отметить как выполнено">✓</th>
+        </tr></thead>
+        <tbody id="calBody"></tbody>
+      </table>
+    </div>
+  </div>
+  <p class="small mute">Клик по дате → календарь → ввод фактической даты. Если дата позже законной — появится «Отклонение», иначе — «Своевременно». Правки сохраняются в браузере.</p>
+</section>
+
+<!-- 2. ФОРМЫ -->
+<section id="s2">
+  <h2>Формы ФНО</h2>
+  <details open><summary>100.00 — Декларация по КПН</summary>
+    <div class="kv"><span class="k">Кто сдаёт</span><b>Все ТОО на ОУР</b></div>
+    <div class="kv"><span class="k">Периодичность</span><b>Год, до 31 марта</b></div>
+    <div class="kv"><span class="k">Уплата</span><b>+10 календарных дней после сдачи</b></div>
+  </details>
+  <details><summary>200.00 — ИПН и социальные платежи</summary>
+    <div class="kv"><span class="k">Кто сдаёт</span><b>Работодатель</b></div>
+    <div class="kv"><span class="k">Сдача</span><b>До 15-го числа второго месяца после квартала</b></div>
+    <div class="kv"><span class="k">Уплата</span><b>До 25-го числа</b></div>
+  </details>
+  <details><summary>300.00 — Декларация по НДС</summary>
+    <div class="kv"><span class="k">Кто сдаёт</span><b>Плательщики НДС</b></div>
+    <div class="kv"><span class="k">Сдача</span><b>15-е число второго месяца (ст. 505 НК РК)</b></div>
+    <div class="kv"><span class="k">Уплата</span><b>25-е число (ст. 506 НК РК)</b></div>
+  </details>
+  <details><summary>328.00 — Ввоз из ЕАЭС</summary>
+    <div class="kv"><span class="k">Сдача</span><b>До 20-го числа следующего месяца</b></div>
+  </details>
+</section>
+
+<!-- 3. НДС -->
+<section id="s3">
+  <h2>НДС</h2>
+  <div class="card">
+    <h3 style="margin-top:0">Опорные параметры</h3>
+    <div class="kv"><span class="k">Ставка</span><b>16% <span class="tag warn">сверить</span></b></div>
+    <div class="kv"><span class="k">Порог постановки на учёт</span><b>10 000 МРП = 43 250 000 ₸</b></div>
+    <div class="kv"><span class="k">Срок подачи заявления</span><b>5 рабочих дней</b></div>
+  </div>
+</section>
+
+<!-- 4. КПН -->
+<section id="s4">
+  <h2>КПН</h2>
+  <div class="card">
+    <div class="kv"><span class="k">Базовая ставка</span><b>20%</b></div>
+    <div class="kv"><span class="k">База</span><b>Доходы − вычеты − перенос убытков</b></div>
+  </div>
+</section>
+
+<!-- 5. ЗАРПЛАТА -->
+<section id="s5">
+  <h2>Зарплата</h2>
+  <div class="tbl-wrap card" style="padding:0">
+    <table>
+      <thead><tr><th>Платёж</th><th>Ставка 2026</th></tr></thead>
+      <tbody>
+        <tr><td>ИПН</td><td>10% до 8 500 МРП / 15% свыше</td></tr>
+        <tr><td>ОПВ</td><td>10%</td></tr>
+        <tr><td>ОПВР</td><td>3,5%</td></tr>
+        <tr><td>СО</td><td><span class="tag warn">сверить</span></td></tr>
+        <tr><td>ВОСМС</td><td>2%</td></tr>
+        <tr><td>ООСМС</td><td>3%</td></tr>
+        <tr><td>Соцналог</td><td>6%</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- 6-13 вкладки -->
+<section id="s6"><h2>Отчёт учредителю</h2><div class="card">Ежемесячно: ОПиУ, баланс, ДДС.</div></section>
+<section id="s7"><h2>Учётная политика</h2><div class="card">Оценка запасов, амортизация ОС.</div></section>
+<section id="s8"><h2>Закрытие периода</h2><div class="card">Чек-лист по дням.</div></section>
+<section id="s9"><h2>Налоговые риски</h2><div class="card">Камеральный контроль, ЭСФ.</div></section>
+<section id="s10"><h2>Допущения</h2><div class="card">Праздники 2026, 30.08.2026 — рабочий день.</div></section>
+<section id="s11"><h2>1С → ИСНА</h2><div class="card">Выгрузка JSON.</div></section>
+<section id="s12"><h2>Очистка текста</h2><div class="card">AntiWatermark.</div></section>
+<section id="s13">
+  <h2>Производственный календарь 2026</h2>
+  <div class="tbl-wrap card" style="padding:0">
+    <table>
+      <thead><tr><th>Месяц</th><th>Рабочих дней</th><th>Норма часов</th></tr></thead>
+      <tbody id="prodBody"></tbody>
+    </table>
+  </div>
+</section>
+
+</main>
+
+<!-- Плавающая кнопка WhatsApp -->
+<a href="https://wa.me/77777717707?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%20%D0%98%D0%BD%D1%82%D0%B5%D1%80%D0%B5%D1%81%D1%83%D0%B5%D1%82%20%D0%BA%D0%BE%D0%BD%D1%81%D1%83%D0%BB%D1%8C%D1%82%D0%B0%D1%86%D0%B8%D1%8F%20%D0%BF%D0%BE%20%D1%81%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D1%8E%20%D1%81%D0%B0%D0%B9%D1%82%D0%B0"
+   class="wa-float"
+   target="_blank"
+   rel="noopener noreferrer"
+   aria-label="Написать в WhatsApp">
+  <span class="tip">Написать в WhatsApp</span>
+  <svg viewBox="0 0 32 32" width="30" height="30" fill="#fff" aria-hidden="true">
+    <path d="M16 2.6C8.6 2.6 2.6 8.6 2.6 16c0 2.6.7 5.1 2 7.3L2.6 29.4l6.3-1.6c2.1 1.1 4.5 1.8 7.1 1.8 7.4 0 13.4-6 13.4-13.4S23.4 2.6 16 2.6zm0 24.3c-2.3 0-4.4-.6-6.2-1.7l-.4-.3-3.7 1 1-3.6-.3-.4c-1.1-1.9-1.7-4-1.7-6.3 0-6.6 5.3-11.9 11.9-11.9 3.2 0 6.2 1.2 8.4 3.5 2.3 2.3 3.5 5.3 3.5 8.4 0 6.6-5.3 11.9-11.9 11.9zm6.5-8.9c-.4-.2-2.1-1-2.4-1.2-.3-.1-.5-.2-.7.2-.2.4-.8 1-1 1.2-.2.2-.4.2-.7.1-.4-.2-1.5-.5-2.8-1.7-1-.9-1.7-2-1.9-2.4-.2-.4 0-.6.2-.8.2-.2.4-.5.6-.7.2-.2.2-.4.3-.6.1-.2 0-.4 0-.6 0-.2-.7-1.7-.9-2.3-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1 2.9 1.2 3.1c.2.2 2.1 3.2 5 4.4.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 2.1-.8 2.4-1.6.3-.8.3-1.5.2-1.6-.1-.2-.3-.3-.6-.4z"/>
+  </svg>
+</a>
+
+<nav class="bottom" id="bottomNav"></nav>
+
+<script>
+const TABS=[
+  {id:'s1',label:'Календарь',icon:'📅'},
+  {id:'s2',label:'Формы',icon:'📄'},
+  {id:'s3',label:'НДС',icon:'💰'},
+  {id:'s4',label:'КПН',icon:'📊'},
+  {id:'s5',label:'Зарплата',icon:'👥'},
+  {id:'s6',label:'Учредителю',icon:'📈'},
+  {id:'s7',label:'Учётная политика',icon:'📘'},
+  {id:'s8',label:'Закрытие',icon:'✅'},
+  {id:'s9',label:'Риски',icon:'⚠️'},
+  {id:'s10',label:'Допущения',icon:'ℹ️'},
+  {id:'s11',label:'1С → ИСНА',icon:'🔄'},
+  {id:'s12',label:'Очистка текста',icon:'🧹'},
+  {id:'s13',label:'Произв. календарь',icon:'🗓️'}
+];
+
+const topTabs=document.getElementById('topTabs');
+TABS.forEach((t,i)=>{
+  const b=document.createElement('button');
+  b.textContent=t.label; if(i===0)b.className='active';
+  b.onclick=()=>switchTab(t.id);
+  topTabs.appendChild(b);
+});
+
+const bottomNav=document.getElementById('bottomNav');
+TABS.slice(0,5).forEach((t,i)=>{
+  const b=document.createElement('button');
+  b.innerHTML='<i>'+t.icon+'</i>'+t.label; if(i===0)b.className='active';
+  b.onclick=()=>switchTab(t.id);
+  bottomNav.appendChild(b);
+});
+const moreBtn=document.createElement('button');
+moreBtn.innerHTML='<i>⋯</i>Ещё';
+moreBtn.onclick=()=>{
+  const id=prompt('Введите номер вкладки (6-13):\n6. Учредителю\n7. Учётная политика\n8. Закрытие\n9. Риски\n10. Допущения\n11. 1С → ИСНА\n12. Очистка текста\n13. Производственный календарь');
+  const n=parseInt(id);
+  if(n>=6&&n<=13)switchTab('s'+n);
+};
+bottomNav.appendChild(moreBtn);
+
+function switchTab(id){
+  document.querySelectorAll('main section').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.querySelectorAll('nav.tabs button').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('nav.bottom button').forEach(b=>b.classList.remove('active'));
+  const idx=TABS.findIndex(t=>t.id===id);
+  if(idx>=0&&idx<5)document.querySelectorAll('nav.bottom button')[idx].classList.add('active');
+  if(idx>=0)document.querySelectorAll('nav.tabs button')[idx].classList.add('active');
+  window.scrollTo(0,0);
+}
+
+// ===== КАЛЕНДАРЬ =====
+const D=(y,m,d)=>new Date(y,m-1,d);
+const fmt=x=>String(x.getDate()).padStart(2,'0')+'.'+String(x.getMonth()+1).padStart(2,'0')+'.'+x.getFullYear();
+const toISO=d=>d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+const fromISO=s=>{const [y,m,d]=s.split('-').map(Number);return new Date(y,m-1,d);};
+const MONTHS=['январь','февраль','март','апрель','май','июнь','июль','август','сентябрь','октябрь','ноябрь','декабрь'];
+
+const HOLIDAYS = new Set([
+  '2026-01-01','2026-01-02','2026-01-07','2026-03-09','2026-03-21','2026-03-22','2026-03-23','2026-03-24','2026-03-25',
+  '2026-05-01','2026-05-07','2026-05-11','2026-05-27','2026-07-06','2026-10-26','2026-12-16'
+]);
+
+const key=d=>d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+
+function shift(x){
+  let c=new Date(x.getTime()); let guard=0;
+  while(guard<30){
+    guard++;
+    const w=c.getDay();
+    if(w===6){c.setDate(c.getDate()+2);continue;}
+    if(w===0){c.setDate(c.getDate()+1);continue;}
+    if(HOLIDAYS.has(key(c))){c.setDate(c.getDate()+1);continue;}
+    break;
+  }
+  return c;
+}
+
+const STORAGE_KEY='tax_cal_2026_v5';
+const DONE_KEY='tax_cal_done_2026_v3';
+let overrides={};
+try{overrides=JSON.parse(localStorage.getItem(STORAGE_KEY)||'{}');}catch(e){overrides={};}
+let doneFlags={};
+try{doneFlags=JSON.parse(localStorage.getItem(DONE_KEY)||'{}');}catch(e){doneFlags={};}
+
+const rows=[]; let n=0;
+const add=o=>{n++;rows.push(Object.assign({no:n},o));};
+
+const periods=[{y:2025,m:12}];
+for(let m=1;m<=12;m++)periods.push({y:2026,m});
+
+periods.forEach(p=>{
+  const nm = p.m===12 ? {y:p.y+1,m:1} : {y:p.y,m:p.m+1};
+  const label = MONTHS[p.m-1]+' '+p.y;
+
+  add({obl:'Отчёт учредителю: ОПиУ, баланс, ДДС, ДЗ/КЗ, налоговая нагрузка, прогноз', form:'—', period:label, sd:D(nm.y,nm.m,12), ud:null, type:'Внутренний', grp:'Внутренний'});
+  add({obl:'Уплата ИПН, СН, ОПВ, ОПВР, СО, ВОСМС, ООСМС', form:'200.00', period:label, sd:null, ud:D(nm.y,nm.m,25), type:'Уплата', grp:'Зарплата'});
+  add({obl:'Авансовый платёж по КПН', form:'—', period:label, sd:null, ud:D(nm.y,nm.m,25), type:'Уплата', grp:'КПН', cond:true});
+  add({obl:'Заявление о ввозе + уплата косвенных налогов (ЕАЭС)', form:'328.00', period:label, sd:D(nm.y,nm.m,20), ud:D(nm.y,nm.m,20), type:'Сдача + уплата', grp:'ЕАЭС', cond:true});
+});
+
+for(let q=1;q<=4;q++){
+  const sd = new Date(2026, 3*q+1, 15);
+  const pd = new Date(2026, 3*q+1, 25);
+  const lab = q+' кв. 2026';
+
+  add({obl:'Декларация по НДС', form:'300.00', period:lab, sd:sd, ud:null, type:'Сдача', grp:'НДС'});
+  add({obl:'Уплата НДС в бюджет', form:'300.00', period:lab, sd:null, ud:pd, type:'Уплата', grp:'НДС'});
+  add({obl:'Расчёт по ИПН и социальным платежам', form:'200.00', period:lab, sd:sd, ud:null, type:'Сдача', grp:'Зарплата'});
+  add({obl:'Плата за НВОС', form:'870.00', period:lab, sd:sd, ud:null, type:'Сдача', grp:'НВОС', cond:true});
+  add({obl:'Уплата платы за НВОС', form:'870.00', period:lab, sd:null, ud:pd, type:'Уплата', grp:'НВОС', cond:true});
+}
+
+add({obl:'Декларация по КПН за 2025 год', form:'100.00', period:'2025 год', sd:D(2026,3,31), ud:null, type:'Сдача', grp:'КПН'});
+add({obl:'Уплата КПН за 2025 год', form:'100.00', period:'2025 год', sd:null, ud:D(2026,4,10), type:'Уплата', grp:'КПН'});
+add({obl:'Декларация по КПН за 2026 год', form:'100.00', period:'2026 год', sd:D(2027,3,31), ud:null, type:'Сдача', grp:'КПН'});
+add({obl:'Уплата КПН за 2026 год', form:'100.00', period:'2026 год', sd:null, ud:D(2027,4,10), type:'Уплата', grp:'КПН'});
+
+const seen=new Set();
+rows.forEach(r=>{
+  let base=(r.form||'x')+'|'+r.period+'|'+r.type;
+  let id=base, i=1;
+  while(seen.has(id)){id=base+'#'+(i++);}
+  seen.add(id);
+  r.id=id;
+});
+
+function applyAll(){
+  rows.forEach(r=>{
+    r.sdEff = r.sd ? shift(r.sd) : null;
+    r.udEff = r.ud ? shift(r.ud) : null;
+    const o = overrides[r.id];
+    if(o){
+      if(o.sd !== undefined) r.sdEff = o.sd ? fromISO(o.sd) : null;
+      if(o.ud !== undefined) r.udEff = o.ud ? fromISO(o.ud) : null;
+    }
+    const cands = [r.sdEff, r.udEff].filter(Boolean);
+    r.ref = cands.length ? cands.sort((a,b)=>a-b)[0] : null;
+  });
+}
+
+function initialSort(){
+  rows.sort((a,b)=>(a.ref||0)-(b.ref||0));
+  rows.forEach((r,i)=>r.no=i+1);
+}
+
+applyAll();
+initialSort();
+
+const groups=['Все','НДС','КПН','Зарплата','ЕАЭС','НВОС','Внутренний'];
+const chips=document.getElementById('chips');
+let activeGroup='Все';
+groups.forEach(g=>{
+  const c=document.createElement('button');
+  c.className='chip'+(g==='Все'?' active':''); c.textContent=g;
+  c.onclick=()=>{activeGroup=g;document.querySelectorAll('.chip').forEach(x=>x.classList.remove('active'));c.classList.add('active');renderCal();};
+  chips.appendChild(c);
+});
+
+document.getElementById('search').addEventListener('input',renderCal);
+
+function renderDateCell(r, field, today){
+  const legalDate = field === 'sd' ? (r.sd ? shift(r.sd) : null) : (r.ud ? shift(r.ud) : null);
+  const effDate = field === 'sd' ? r.sdEff : r.udEff;
+  const o = overrides[r.id];
+  const isOverridden = o && o[field] !== undefined;
+  const isDone = doneFlags[r.id] === true;
+
+  if(!legalDate && !effDate) return '<td class="date-cell"><span class="mute">—</span></td>';
+
+  const val = effDate ? toISO(effDate) : '';
+  const mark = isOverridden ? ' <span class="ovr" title="Изменено вручную">✎</span>' : '';
+
+  let statusHtml = '';
+  if(effDate){
+    const diff = Math.round((effDate - legalDate) / 86400000);
+    if(diff > 0){
+      statusHtml = `<div class="st-bad">Отклонение +${diff} дн.</div>`;
+    } else {
+      if(today <= legalDate && !isOverridden){
+        const left = Math.round((legalDate - today)/86400000);
+        statusHtml = `<div class="st-mute">В срок (${left} дн.)</div>`;
+      } else {
+        if(isOverridden || isDone){
+          statusHtml = `<div class="st-ok">Своевременно</div>`;
+        } else {
+          statusHtml = `<div class="st-warn">Ожидает подтверждения</div>`;
+        }
+      }
+    }
+  }
+
+  return '<td class="date-cell">'+
+    '<input type="date" class="dt" data-id="'+r.id+'" data-f="'+field+'" value="'+val+'" title="Закон: '+fmt(legalDate)+'">'+mark+
+    statusHtml+
+    '</td>';
+}
+
+function renderCal(){
+  const q=(document.getElementById('search').value||'').toLowerCase();
+  const today=new Date(new Date().toDateString());
+  document.getElementById('calBody').innerHTML=rows
+    .filter(r=>activeGroup==='Все'||r.grp===activeGroup)
+    .filter(r=>!q||(r.obl+r.form+r.period).toLowerCase().includes(q))
+    .map(r=>{
+      const done = doneFlags[r.id] === true;
+      return '<tr>'+
+        '<td>'+r.no+'</td>'+
+        '<td>'+r.obl+(r.cond?' <span class="tag">условно</span>':'')+'</td>'+
+        '<td>'+r.form+'</td>'+
+        '<td>'+r.period+'</td>'+
+        renderDateCell(r,'sd',today)+
+        renderDateCell(r,'ud',today)+
+        '<td>'+r.type+'</td>'+
+        '<td class="col-mark"><button class="mark-btn '+(done?'active':'')+'" data-id="'+r.id+'" title="Отметить как выполнено">'+(done?'✓':'○')+'</button></td>'+
+        '</tr>';
+    }).join('');
+
+  document.querySelectorAll('input.dt').forEach(inp=>{
+    inp.addEventListener('change', onDateChange);
+  });
+  document.querySelectorAll('.mark-btn').forEach(btn=>{
+    btn.addEventListener('click', toggleDone);
+  });
+}
+
+function onDateChange(e){
+  const id = e.target.dataset.id;
+  const field = e.target.dataset.f;
+  const val = e.target.value;
+  overrides[id] = overrides[id] || {};
+  overrides[id][field] = val || null;
+  try{localStorage.setItem(STORAGE_KEY, JSON.stringify(overrides));}catch(err){}
+  applyAll();
+  renderCal();
+}
+
+function toggleDone(e){
+  const id = e.currentTarget.dataset.id;
+  doneFlags[id] = !doneFlags[id];
+  try{localStorage.setItem(DONE_KEY, JSON.stringify(doneFlags));}catch(err){}
+  renderCal();
+}
+
+function resetOverrides(){
+  if(!confirm('Сбросить все правки дат и отметки «выполнено»?')) return;
+  overrides={};
+  doneFlags={};
+  try{localStorage.removeItem(STORAGE_KEY);localStorage.removeItem(DONE_KEY);}catch(e){}
+  applyAll();
+  renderCal();
+}
+
+// === ИСПРАВЛЕННЫЙ ЭКСПОРТ ===
+function base64Encode(str) {
+  return btoa(unescape(encodeURIComponent(str)));
+}
+
+function getExportTableHtml(){
+  const clone = document.getElementById('calTable').cloneNode(true);
+  
+  // Заменяем ячейки с датами и статусами на чистый текст
+  clone.querySelectorAll('.date-cell').forEach(td => {
+    const inp = td.querySelector('input.dt');
+    const div = td.querySelector('div');
+    let txt = '';
+    if(inp && inp.value){
+      const [y,m,d] = inp.value.split('-');
+      txt = d+'.'+m+'.'+y;
+    } else {
+      txt = '—';
+    }
+    if(div && div.textContent.trim()) {
+      txt += ' (' + div.textContent.trim() + ')';
+    }
+    td.innerHTML = txt;
+  });
+  
+  // Убираем лишние элементы
+  clone.querySelectorAll('.tag').forEach(t=>{
+    t.replaceWith(document.createTextNode(' ['+t.textContent+']'));
+  });
+  clone.querySelectorAll('.ovr').forEach(el=>el.remove());
+  clone.querySelectorAll('.col-mark').forEach(el=>el.remove());
+  clone.querySelectorAll('.mark-btn').forEach(btn=>{
+    const td = btn.closest('td');
+    if(td) td.remove();
+  });
+  
+  return clone.outerHTML;
+}
+
+function exportExcel(){
+  const tbl = getExportTableHtml();
+  const html = '<html xmlns:x="urn:schemas-microsoft-com:office:excel"><head><meta charset="utf-8"><style>td,th{border:1px solid #999;padding:4px;font-family:Arial;font-size:10pt;vertical-align:top}th{background:#dbeafe;font-weight:bold}</style></head><body>'+
+    '<h2>Налоговый календарь 2026 — ТОО на ОУР + НДС</h2>'+
+    '<p style="font-size:9pt;color:#555">Скачано: '+new Date().toLocaleString('ru-RU')+'</p>'+
+    tbl+'</body></html>';
+  
+  const a = document.createElement('a');
+  a.href = 'data:application/vnd.ms-excel;base64,' + base64Encode(html);
+  a.download = 'calendar_2026.xls';
+  a.click();
+}
+
+function exportWord(){
+  const tbl = getExportTableHtml();
+  const html = '<html xmlns:w="urn:schemas-microsoft-com:office:word"><head><meta charset="utf-8"><style>body{font-family:Arial,sans-serif}td,th{border:1px solid #999;padding:4px;font-size:9pt;vertical-align:top}th{background:#dbeafe;font-weight:bold}h2{font-size:14pt}</style></head><body>'+
+    '<h2>Налоговый календарь 2026 — ТОО на ОУР + НДС</h2>'+
+    '<p style="font-size:9pt;color:#555">Скачано: '+new Date().toLocaleString('ru-RU')+'</p>'+
+    tbl+'</body></html>';
+  
+  const a = document.createElement('a');
+  a.href = 'data:application/msword;base64,' + base64Encode(html);
+  a.download = 'calendar_2026.doc';
+  a.click();
+}
+
+renderCal();
+
+const PROD_MONTHS=[
+  ['Январь',19,152],['Февраль',20,160],['Март',18,144],['Апрель',22,176],
+  ['Май',17,136],['Июнь',22,176],['Июль',22,176],['Август',20,160],
+  ['Сентябрь',22,176],['Октябрь',21,168],['Ноябрь',21,168],['Декабрь',22,176]
+];
+const prodBody=document.getElementById('prodBody');
+PROD_MONTHS.forEach(m=>{
+  prodBody.innerHTML+='<tr><td>'+m[0]+'</td><td>'+m[1]+'</td><td>'+m[2]+'</td></tr>';
+});
+prodBody.innerHTML+='<tr style="font-weight:700;background:#e0e7ff"><td>Год</td><td>247</td><td>1976</td></tr>';
+</script>
+</body>
+</html>
