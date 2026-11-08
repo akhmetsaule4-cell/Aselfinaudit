@@ -53,6 +53,12 @@ nav.bottom button{flex:1;background:none;border:0;font-size:10px;color:var(--mut
 nav.bottom button.active{color:var(--pri);font-weight:700}
 nav.bottom button i{display:block;font-style:normal;font-size:17px;margin-bottom:2px}
 
+.more-menu{position:fixed;bottom:70px;left:10px;right:10px;background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:0 -5px 20px rgba(0,0,0,.15);display:none;z-index:30;overflow:hidden}
+.more-menu.open{display:block}
+.more-menu button{display:block;width:100%;text-align:left;background:#fff;border:0;border-bottom:1px solid var(--line);padding:14px 16px;font-size:15px;color:var(--ink);cursor:pointer}
+.more-menu button:last-child{border-bottom:0}
+.more-menu button:hover{background:#f1f5f9}
+
 .export-bar{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
 .btn-export{display:inline-flex;align-items:center;gap:6px;background:var(--pri);color:#fff;border:0;padding:10px 14px;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit}
 .btn-export.alt{background:#047857}
@@ -81,7 +87,7 @@ input.dt:focus{outline:none;border-color:var(--pri);background:#fff;box-shadow:0
 .wa-float .tip{position:absolute;right:66px;top:50%;transform:translateY(-50%);background:#0f172a;color:#fff;font-size:12px;font-weight:600;padding:6px 10px;border-radius:8px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .15s ease}
 .wa-float:hover .tip{opacity:1}
 
-@media(min-width:900px){body{padding-bottom:20px}nav.tabs{display:flex}nav.bottom{display:none}.wa-float{bottom:20px;right:20px}}
+@media(min-width:900px){body{padding-bottom:20px}nav.tabs{display:flex}nav.bottom{display:none}.more-menu{display:none!important}.wa-float{bottom:20px;right:20px}}
 @media(max-width:600px){main{padding:10px}h2{font-size:18px}header.top b{font-size:15px}table{font-size:12px;min-width:760px}input.dt{max-width:110px;font-size:12px}.wa-float{width:52px;height:52px;right:14px;bottom:86px}.wa-float .tip{display:none}}
 </style>
 </head>
@@ -123,23 +129,31 @@ input.dt:focus{outline:none;border-color:var(--pri);background:#fff;box-shadow:0
 <!-- 2. ФОРМЫ -->
 <section id="s2">
   <h2>Формы ФНО</h2>
+  <div class="card">
+    <h3 style="margin-top:0">Что это и зачем?</h3>
+    <p class="small">ФНО — формы налоговой отчетности. Вам нужно сдавать их в ИСНА строго в срок, чтобы избежать штрафов и пеней. Ниже — ключевые формы для ТОО на ОУР.</p>
+  </div>
   <details open><summary>100.00 — Декларация по КПН</summary>
     <div class="kv"><span class="k">Кто сдаёт</span><b>Все ТОО на ОУР</b></div>
     <div class="kv"><span class="k">Периодичность</span><b>Год, до 31 марта</b></div>
     <div class="kv"><span class="k">Уплата</span><b>+10 календарных дней после сдачи</b></div>
+    <p class="small"><b>Что проверить:</b> невычитаемые расходы, убытки прошлых лет (до 10 лет), зачёт авансов.</p>
   </details>
   <details><summary>200.00 — ИПН и социальные платежи</summary>
     <div class="kv"><span class="k">Кто сдаёт</span><b>Работодатель</b></div>
     <div class="kv"><span class="k">Сдача</span><b>До 15-го числа второго месяца после квартала</b></div>
     <div class="kv"><span class="k">Уплата</span><b>До 25-го числа</b></div>
+    <p class="small"><b>Что проверить:</b> прогрессивный ИПН (10/15%), вычеты, нерезиденты, ГПХ.</p>
   </details>
   <details><summary>300.00 — Декларация по НДС</summary>
     <div class="kv"><span class="k">Кто сдаёт</span><b>Плательщики НДС</b></div>
     <div class="kv"><span class="k">Сдача</span><b>15-е число второго месяца (ст. 505 НК РК)</b></div>
     <div class="kv"><span class="k">Уплата</span><b>25-е число (ст. 506 НК РК)</b></div>
+    <p class="small"><b>Что проверить:</b> сверка ЭСФ, пропорция при смешанных оборотах, импорт.</p>
   </details>
   <details><summary>328.00 — Ввоз из ЕАЭС</summary>
     <div class="kv"><span class="k">Сдача</span><b>До 20-го числа следующего месяца</b></div>
+    <p class="small"><b>Что проверить:</b> код ТН ВЭД, метод зачёта, отдельный срок уплаты.</p>
   </details>
 </section>
 
@@ -147,10 +161,26 @@ input.dt:focus{outline:none;border-color:var(--pri);background:#fff;box-shadow:0
 <section id="s3">
   <h2>НДС</h2>
   <div class="card">
+    <h3 style="margin-top:0">Зачем это нужно?</h3>
+    <p class="small">Правильный зачёт НДС снижает налоговую нагрузку. Ошибки в ЭСФ и зачёте ведут к камеральному контролю и доначислениям.</p>
+  </div>
+  <div class="card">
     <h3 style="margin-top:0">Опорные параметры</h3>
     <div class="kv"><span class="k">Ставка</span><b>16% <span class="tag warn">сверить</span></b></div>
     <div class="kv"><span class="k">Порог постановки на учёт</span><b>10 000 МРП = 43 250 000 ₸</b></div>
     <div class="kv"><span class="k">Срок подачи заявления</span><b>5 рабочих дней</b></div>
+  </div>
+  <h3>Зачёт / не зачёт (что делать)</h3>
+  <div class="tbl-wrap card" style="padding:0">
+    <table>
+      <thead><tr><th>Операция</th><th>Решение</th><th>Действие</th></tr></thead>
+      <tbody>
+        <tr><td>Для облагаемых оборотов</td><td><span class="tag ok">В зачёт</span></td><td>Берите в зачёт при наличии ЭСФ</td></tr>
+        <tr><td>Вне предпринимательской деятельности</td><td><span class="tag bad">Не в зачёт</span></td><td>Не включайте в декларацию</td></tr>
+        <tr><td>Смешанные обороты</td><td><span class="tag warn">Пропорция</span></td><td>Рассчитайте пропорцию по методике</td></tr>
+        <tr><td>Импорт из ЕАЭС</td><td><span class="tag warn">Условно</span></td><td>Подайте 328.00 и уплатите НДС</td></tr>
+      </tbody>
+    </table>
   </div>
 </section>
 
@@ -158,14 +188,31 @@ input.dt:focus{outline:none;border-color:var(--pri);background:#fff;box-shadow:0
 <section id="s4">
   <h2>КПН</h2>
   <div class="card">
+    <h3 style="margin-top:0">Зачем это нужно?</h3>
+    <p class="small">КПН — основной налог с прибыли. Правильный учёт вычетов и убытков снижает сумму к уплате.</p>
+  </div>
+  <div class="card">
     <div class="kv"><span class="k">Базовая ставка</span><b>20%</b></div>
     <div class="kv"><span class="k">База</span><b>Доходы − вычеты − перенос убытков</b></div>
+    <div class="kv"><span class="k">Авансы</span><b>Ежемесячно до 25-го (если доход > 600 000 МРП)</b></div>
+  </div>
+  <div class="card">
+    <h3 style="margin-top:0">Что делать:</h3>
+    <ul>
+      <li>Сверять нормируемые расходы с НК 2026</li>
+      <li>Проверять курсовые разницы</li>
+      <li>Подтверждать безнадёжные долги</li>
+    </ul>
   </div>
 </section>
 
 <!-- 5. ЗАРПЛАТА -->
 <section id="s5">
   <h2>Зарплата</h2>
+  <div class="card">
+    <h3 style="margin-top:0">Зачем это нужно?</h3>
+    <p class="small">Ошибки в расчёте налогов с ФОТ ведут к штрафам и неверным вычетам у сотрудников.</p>
+  </div>
   <div class="tbl-wrap card" style="padding:0">
     <table>
       <thead><tr><th>Платёж</th><th>Ставка 2026</th></tr></thead>
@@ -182,95 +229,218 @@ input.dt:focus{outline:none;border-color:var(--pri);background:#fff;box-shadow:0
   </div>
 </section>
 
-<!-- 6-13 вкладки -->
-<section id="s6"><h2>Отчёт учредителю</h2><div class="card">Ежемесячно: ОПиУ, баланс, ДДС.</div></section>
-<section id="s7"><h2>Учётная политика</h2><div class="card">Оценка запасов, амортизация ОС.</div></section>
-<section id="s8"><h2>Закрытие периода</h2><div class="card">Чек-лист по дням.</div></section>
-<section id="s9"><h2>Налоговые риски</h2><div class="card">Камеральный контроль, ЭСФ.</div></section>
-<section id="s10"><h2>Допущения</h2><div class="card">Праздники 2026, 30.08.2026 — рабочий день.</div></section>
-<section id="s11"><h2>1С → ИСНА</h2><div class="card">Выгрузка JSON.</div></section>
-<section id="s12"><h2>Очистка текста</h2><div class="card">AntiWatermark.</div></section>
-<section id="s13">
-  <h2>Производственный календарь 2026</h2>
+<!-- 6. ОТЧЁТ УЧРЕДИТЕЛЮ -->
+<section id="s6">
+  <h2>Отчёт учредителю</h2>
+  <div class="card">
+    <h3 style="margin-top:0">Зачем это нужно?</h3>
+    <p class="small">Учредитель должен видеть реальную картину бизнеса и налоговую нагрузку, чтобы принимать решения.</p>
+  </div>
   <div class="tbl-wrap card" style="padding:0">
     <table>
-      <thead><tr><th>Месяц</th><th>Рабочих дней</th><th>Норма часов</th></tr></thead>
+      <thead><tr><th>Периодичность</th><th>Состав отчёта</th><th>Что делать</th></tr></thead>
+      <tbody>
+        <tr><td>Ежемесячно (до 12-го)</td><td>ОПиУ, баланс, ДДС, ДЗ/КЗ с возрастом долга, налоговая нагрузка, прогноз налогов на 3 месяца, KPI, риски</td><td>Сформировать пакет и отправить учредителю</td></tr>
+        <tr><td>Ежеквартально</td><td>План/факт, НДС и КПН к уплате, дивидендные возможности</td><td>Сверить план с фактом, показать риски</td></tr>
+        <tr><td>Ежегодно</td><td>Годовая ФО, пояснительная записка, дивиденды, резервы, план оптимизации</td><td>Подготовить годовой отчёт</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- 7. УЧЁТНАЯ ПОЛИТИКА -->
+<section id="s7">
+  <h2>Учётная политика (проект)</h2>
+  <div class="card">
+    <h3 style="margin-top:0">Зачем это нужно?</h3>
+    <p class="small">Учётная политика — это внутренний закон компании. Она определяет, как ведётся учёт, и защищает вас при проверках.</p>
+  </div>
+  <div class="card">
+    <h3 style="margin-top:0">1. Оценка запасов</h3>
+    <p class="small">Выберите метод: ФИФО, средневзвешенная стоимость или специфическая идентификация. Зафиксируйте в приказе. Применяйте последовательно.</p>
+  </div>
+  <div class="card">
+    <h3 style="margin-top:0">2. Амортизация ОС и НМА</h3>
+    <p class="small">Определите сроки полезного использования, методы начисления (линейный, уменьшаемого остатка и др.), ликвидационную стоимость. Проверьте, чтобы в 1С настройки соответствовали приказу.</p>
+  </div>
+  <div class="card">
+    <h3 style="margin-top:0">3. Признание выручки</h3>
+    <p class="small">Метод начисления. Укажите момент перехода права собственности. Разделите выручку по видам деятельности (для пропорции НДС).</p>
+  </div>
+  <div class="card">
+    <h3 style="margin-top:0">4. Резервы</h3>
+    <p class="small">Опишите порядок создания резервов: сомнительные долги, отпуска, гарантии. Укажите, как определяется сумма и как она корректируется.</p>
+  </div>
+  <div class="card">
+    <h3 style="margin-top:0">5. Регламент ЭСФ и первички</h3>
+    <p class="small">Укажите, кто и в какой срок выписывает ЭСФ, как проверяются входящие ЭСФ, где хранятся документы. Ответственные за сверку.</p>
+  </div>
+  <div class="card">
+    <h3 style="margin-top:0">6. Закрытие периода, права подписи, хранение</h3>
+    <p class="small">Установите сроки закрытия периода (например, до 5-го числа). Перечислите лиц с правом подписи. Укажите сроки хранения первички (5 лет) и базы 1С.</p>
+  </div>
+</section>
+
+<!-- 8. ЗАКРЫТИЕ ПЕРИОДА -->
+<section id="s8">
+  <h2>Закрытие периода</h2>
+  <div class="card">
+    <h3 style="margin-top:0">Зачем это нужно?</h3>
+    <p class="small">Чёткий чек-лист гарантирует, что вы ничего не забудете до сдачи отчётности.</p>
+  </div>
+  <div class="tbl-wrap card" style="padding:0">
+    <table>
+      <thead><tr><th>День</th><th>Блок</th><th>Что подтверждает</th></tr></thead>
+      <tbody>
+        <tr><td>Д+1</td><td>Банк, касса</td><td>Выписки, ПКО/РКО</td></tr>
+        <tr><td>Д+2</td><td>Первичка</td><td>Накладные, акты</td></tr>
+        <tr><td>Д+3</td><td>ЭСФ</td><td>Реестр, сверка</td></tr>
+        <tr><td>Д+4</td><td>Сверки</td><td>Акты сверки</td></tr>
+        <tr><td>Д+5</td><td>ФОТ</td><td>Табель, ведомости</td></tr>
+        <tr><td>Д+6</td><td>ОС и запасы</td><td>Инвентаризация</td></tr>
+        <tr><td>Д+7</td><td>Курсовые разницы</td><td>Переоценка</td></tr>
+        <tr><td>Д+8</td><td>Налоги</td><td>Расчёт</td></tr>
+        <tr><td>Д+9</td><td>Отчёты</td><td>Сверка с ИСНА</td></tr>
+        <tr><td>Д+10</td><td>Учредителю</td><td>Пакет</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- 9. РИСКИ -->
+<section id="s9">
+  <h2>Налоговые риски</h2>
+  <div class="card">
+    <h3 style="margin-top:0">Зачем это нужно?</h3>
+    <p class="small">Понимание рисков помогает избежать блокировок счетов и доначислений.</p>
+  </div>
+  <div class="card">
+    <h3 style="margin-top:0">Что делать:</h3>
+    <ul>
+      <li><b>ЭСФ ↔ 300.00:</b> ежемесячно сверять выписанные и полученные ЭСФ с декларацией.</li>
+      <li><b>Нагрузка:</b> сравнивать свою налоговую нагрузку со среднеотраслевой.</li>
+      <li><b>Взаимозависимые:</b> проверять сделки с учредителями и аффилированными лицами.</li>
+      <li><b>Обналичка:</b> не работать с «техническими» контрагентами.</li>
+      <li><b>ТЦО:</b> проверять, не попадают ли сделки под контроль.</li>
+      <li><b>Камеральный контроль:</b> отвечать на уведомления в течение 30 рабочих дней.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- 10. ДОПУЩЕНИЯ -->
+<section id="s10">
+  <h2>Допущения</h2>
+  <div class="card">
+    <h3 style="margin-top:0">Что важно знать о сайте:</h3>
+    <ul>
+      <li>Перенос — Сб/Вс + праздники РК; 30.08.2026 — рабочий день</li>
+      <li>200.00: периодичность и срок СН — требуют сверки</li>
+      <li>328.00: срок уплаты — требует проверки</li>
+      <li>870.00: срок 15/25 подтверждён для 1 кв.</li>
+      <li>Ставки — брать из НК 214-VIII</li>
+      <li>Статья НК в tooltip — справочная; сверять с актуальной редакцией</li>
+      <li>Отметка ✓ = «подтверждено пользователем», не гарантия приёма КГД</li>
+      <li>Правки и отметки сохраняются в localStorage вашего браузера</li>
+    </ul>
+  </div>
+</section>
+
+<!-- 11. 1С → ИСНА -->
+<section id="s11">
+  <h2>1С → ИСНА</h2>
+  <div class="card">
+    <h3 style="margin-top:0">Зачем это нужно?</h3>
+    <p class="small">Чтобы сдавать отчётность из 1С без ручного ввода и ошибок.</p>
+  </div>
+  <div class="card">
+    <h3 style="margin-top:0">Способ А. Прямая отправка</h3>
+    <div class="kv"><span class="k">Версия 1С</span><b>≥ 3.0.69.1</b></div>
+    <div class="kv"><span class="k">Сервис</span><b>1С:Отчетность для Казахстана</b></div>
+    <div class="kv"><span class="k">Криптография</span><b>NCA Layer</b></div>
+    <div class="kv"><span class="k">Команды</span><b>Проверить → Отправить → Обновить статус</b></div>
+  </div>
+  <div class="card">
+    <h3 style="margin-top:0">Способ Б. JSON вручную</h3>
+    <ol style="margin:6px 0 0 18px;padding:0">
+      <li>Сформировать форму в 1С</li>
+      <li>«Выгрузить в ИСНА (JSON)» → сохранить</li>
+      <li>Войти в КНП ИСНА (knp.kgd.gov.kz)</li>
+      <li>«Подать документ» → шаблон ФНО</li>
+      <li>Загрузить JSON → проверить → подписать → отправить</li>
+    </ol>
+  </div>
+</section>
+
+<!-- 12. ОЧИСТКА ТЕКСТА -->
+<section id="s12">
+  <h2>Очистка текста от следов ИИ</h2>
+  <div class="card">
+    <h3 style="margin-top:0">Зачем это нужно?</h3>
+    <p class="small">Использование ИИ для генерации отчетов и документов может привести к ошибкам и несоответствиям. Лучше не использовать ИИ для налоговых форм и учетной политики.</p>
+  </div>
+  <div class="card">
+    <h3 style="margin-top:0">Инструменты:</h3>
+    <ul>
+      <li><b>AntiWatermark</b> — локально</li>
+      <li><b>deslopify</b> — Python</li>
+      <li><b>humanizer-ru</b> — 38 паттернов</li>
+      <li><b>deslop-ru</b> — 28 паттернов</li>
+    </ul>
+  </div>
+</section>
+
+<!-- 13. ПРОИЗВОДСТВЕННЫЙ КАЛЕНДАРЬ -->
+<section id="s13">
+  <h2>Производственный календарь 2026</h2>
+  <div class="card">
+    <h3 style="margin-top:0">Зачем это нужно?</h3>
+    <p class="small">Для расчёта отпускных, больничных и норм рабочего времени.</p>
+  </div>
+  <div class="tbl-wrap card" style="padding:0">
+    <table>
+      <thead><tr><th>Месяц</th><th>Рабочих дней</th><th>Норма часов (40 ч)</th></tr></thead>
       <tbody id="prodBody"></tbody>
     </table>
   </div>
 </section>
 
-<!-- 14. ИИ-АГЕНТЫ (НОВАЯ ВКЛАДКА) -->
+<!-- 14. ИИ-АГЕНТЫ -->
 <section id="s14">
   <h2>🤖 ИИ-агенты для бухгалтера</h2>
-  <p class="small mute">Проверенные решения для автоматизации рутины на базе 1С и ERP. Все продукты подтверждены по открытым источникам.</p>
-
-  <h3>Встроенные и сертифицированные решения от «1С»</h3>
-  <details open>
-    <summary>1С:РПД (Распознавание первичных документов)</summary>
-    <div class="kv"><span class="k">Тип</span><b>Облачный сервис, встроен в 1С</b></div>
-    <div class="kv"><span class="k">Функция</span><b>Распознавание сканов, фото, PDF (счета, УПД, акты) и создание черновиков в 1С[reference:8]</b></div>
-    <div class="kv"><span class="k">Конфигурации</span><b>Бухгалтерия, УНФ[reference:9]</b></div>
-    <p class="small">Самый безопасный и простой старт. Требуется интернет и официальная поддержка 1С.</p>
-  </details>
-  <details>
-    <summary>BuhGPT (для Казахстана)</summary>
-    <div class="kv"><span class="k">Тип</span><b>Расширение для «1С:Бухгалтерия для Казахстана»</b></div>
-    <div class="kv"><span class="k">Статус</span><b>Сертификат «1С:Совместимо»[reference:10]</b></div>
-    <div class="kv"><span class="k">Функция</span><b>AI-ассистент для ответов по бухучёту и законодательству РК[reference:11]</b></div>
-  </details>
-
-  <h3>Специализированные агенты для финансовой функции</h3>
-  <details>
-    <summary>ROBIN (цифровые сотрудники)</summary>
-    <div class="kv"><span class="k">Тип</span><b>Платформа RPA + ИИ</b></div>
-    <div class="kv"><span class="k">Агенты</span><b>«Цифровой бухгалтер», «Мастер сверки», «Финансовый цензор» и др.[reference:12]</b></div>
-    <div class="kv"><span class="k">Интеграция</span><b>1С, SAP, банк-клиенты[reference:13]</b></div>
-  </details>
-  <details>
-    <summary>Axis AI (Казахстан)</summary>
-    <div class="kv"><span class="k">Тип</span><b>Сервис для проверки бухгалтерских баз 1С</b></div>
-    <div class="kv"><span class="k">Функция</span><b>Автоматизированная проверка участков учёта и формирование отчётов[reference:14]</b></div>
-    <p class="small">Проверка, занимающая у бухгалтера 4 часа, выполняется системой за ~2,5 минуты[reference:15].</p>
-  </details>
-  <details>
-    <summary>GPTZator</summary>
-    <div class="kv"><span class="k">Тип</span><b>ИИ-платформа для бизнеса</b></div>
-    <div class="kv"><span class="k">Функция</span><b>Ассистент для работы с налоговыми запросами, интеграция с 1С:ERP[reference:16]</b></div>
-    <div class="kv"><span class="k">Статус</span><b>«1С:Совместимо»[reference:17]</b></div>
-  </details>
-
-  <h3>Внешние нейросети (GigaChat, YandexGPT) через API</h3>
-  <details>
-    <summary>GigaChat (Сбер)</summary>
-    <div class="kv"><span class="k">Тип</span><b>Интеграция через API / расширения</b></div>
-    <div class="kv"><span class="k">Функция</span><b>Автоматический разбор платежей, заполнение заказов покупателей в 1С:ERP</b></div>
-  </details>
-  <details>
-    <summary>YandexGPT (Яндекс)</summary>
-    <div class="kv"><span class="k">Тип</span><b>Интеграция через API / обработки</b></div>
-    <div class="kv"><span class="k">Функция</span><b>Сверка контрагентов, анализ данных, работа с базой 1С</b></div>
-  </details>
-
-  <h3>Open-Source решение</h3>
-  <details>
-    <summary>1C AI Agent</summary>
-    <div class="kv"><span class="k">Тип</span><b>Открытый исходный код (GitHub)</b></div>
-    <div class="kv"><span class="k">Функция</span><b>Распознавание документов и создание черновиков в 1С (БП, УНФ)[reference:20]</b></div>
-    <p class="small">Гибкий инструмент для кастомизации под конкретные задачи.</p>
-  </details>
-
-  <h3>С чего начать?</h3>
   <div class="card">
-    <ul>
-      <li><b>Для быстрого старта без рисков:</b> включите «1С:РПД» для автоматизации ввода первички.</li>
-      <li><b>Для проверки своей базы (особенно в РК):</b> присмотритесь к Axis AI или BuhGPT.</li>
-      <li><b>Для глубокой кастомизации:</b> используйте 1C AI Agent или подключите GigaChat/YandexGPT через коннекторы.</li>
-    </ul>
+    <h3 style="margin-top:0">Зачем это нужно?</h3>
+    <p class="small">Автоматизация рутины: распознавание документов, сверка, аудит базы.</p>
   </div>
+  <details open><summary>1С:РПД (Распознавание первичных документов)</summary>
+    <div class="kv"><span class="k">Тип</span><b>Облачный сервис, встроен в 1С</b></div>
+    <div class="kv"><span class="k">Функция</span><b>Распознавание сканов, фото, PDF</b></div>
+  </details>
+  <details><summary>BuhGPT (для Казахстана)</summary>
+    <div class="kv"><span class="k">Тип</span><b>Расширение для «1С:Бухгалтерия для Казахстана»</b></div>
+    <div class="kv"><span class="k">Статус</span><b>Сертификат «1С:Совместимо»</b></div>
+  </details>
+  <details><summary>Axis AI (Казахстан)</summary>
+    <div class="kv"><span class="k">Функция</span><b>Автоматизированная проверка бухгалтерских баз 1С</b></div>
+  </details>
+  <details><summary>1C AI Agent</summary>
+    <div class="kv"><span class="k">Тип</span><b>Открытый исходный код</b></div>
+  </details>
 </section>
 
 </main>
+
+<!-- Меню "Ещё" для мобильных -->
+<div class="more-menu" id="moreMenu">
+  <button onclick="switchTab('s6')">📈 Отчёт учредителю</button>
+  <button onclick="switchTab('s7')">📘 Учётная политика</button>
+  <button onclick="switchTab('s8')">✅ Закрытие периода</button>
+  <button onclick="switchTab('s9')">⚠️ Риски</button>
+  <button onclick="switchTab('s10')">ℹ️ Допущения</button>
+  <button onclick="switchTab('s11')">🔄 1С → ИСНА</button>
+  <button onclick="switchTab('s12')">🧹 Очистка текста</button>
+  <button onclick="switchTab('s13')">🗓️ Произв. календарь</button>
+  <button onclick="switchTab('s14')">🤖 ИИ-агенты</button>
+</div>
 
 <!-- Плавающая кнопка WhatsApp -->
 <a href="https://wa.me/77777717707?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%20%D0%98%D0%BD%D1%82%D0%B5%D1%80%D0%B5%D1%81%D1%83%D0%B5%D1%82%20%D0%BA%D0%BE%D0%BD%D1%81%D1%83%D0%BB%D1%8C%D1%82%D0%B0%D1%86%D0%B8%D1%8F%20%D0%BF%D0%BE%20%D1%81%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D1%8E%20%D1%81%D0%B0%D0%B9%D1%82%D0%B0"
@@ -316,23 +486,32 @@ TABS.slice(0,5).forEach((t,i)=>{
   b.onclick=()=>switchTab(t.id);
   bottomNav.appendChild(b);
 });
+
 const moreBtn=document.createElement('button');
 moreBtn.innerHTML='<i>⋯</i>Ещё';
 moreBtn.onclick=()=>{
-  const id=prompt('Введите номер вкладки (6-14):\n6. Учредителю\n7. Учётная политика\n8. Закрытие\n9. Риски\n10. Допущения\n11. 1С → ИСНА\n12. Очистка текста\n13. Производственный календарь\n14. ИИ-агенты');
-  const n=parseInt(id);
-  if(n>=6&&n<=14)switchTab('s'+n);
+  document.getElementById('moreMenu').classList.toggle('open');
 };
 bottomNav.appendChild(moreBtn);
+
+document.addEventListener('click', function(e) {
+  const menu = document.getElementById('moreMenu');
+  if (menu.classList.contains('open') && !menu.contains(e.target) && !moreBtn.contains(e.target)) {
+    menu.classList.remove('open');
+  }
+});
 
 function switchTab(id){
   document.querySelectorAll('main section').forEach(s=>s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
   document.querySelectorAll('nav.tabs button').forEach(b=>b.classList.remove('active'));
   document.querySelectorAll('nav.bottom button').forEach(b=>b.classList.remove('active'));
+  
   const idx=TABS.findIndex(t=>t.id===id);
-  if(idx>=0&&idx<5)document.querySelectorAll('nav.bottom button')[idx].classList.add('active');
-  if(idx>=0)document.querySelectorAll('nav.tabs button')[idx].classList.add('active');
+  if(idx>=0&&idx<5) document.querySelectorAll('nav.bottom button')[idx].classList.add('active');
+  if(idx>=0) document.querySelectorAll('nav.tabs button')[idx].classList.add('active');
+  
+  document.getElementById('moreMenu').classList.remove('open');
   window.scrollTo(0,0);
 }
 
@@ -538,7 +717,6 @@ function resetOverrides(){
   renderCal();
 }
 
-// === ЭКСПОРТ (BLOB) ===
 function getExportTableHtml(){
   const clone = document.getElementById('calTable').cloneNode(true);
   clone.querySelectorAll('.date-cell').forEach(td => {
