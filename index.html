@@ -6,16 +6,8 @@
 <title>Бухгалтерия 2026 — ТОО ОУР + НДС</title>
 <style>
 :root{
-  --bg:#f6f8fb;
-  --card:#fff;
-  --line:#cbd5e1;
-  --ink:#020617;
-  --mute:#334155;
-  --pri:#1d4ed8;
-  --warn:#b45309;
-  --bad:#b91c1c;
-  --ok:#047857;
-  --wa:#25D366;
+  --bg:#f6f8fb; --card:#fff; --line:#cbd5e1; --ink:#020617; --mute:#334155;
+  --pri:#1d4ed8; --warn:#b45309; --bad:#b91c1c; --ok:#047857; --wa:#25D366;
 }
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{margin:0;padding:0}
@@ -69,84 +61,28 @@ nav.bottom button i{display:block;font-style:normal;font-size:17px;margin-bottom
 .btn-export:active{transform:scale(.98)}
 
 .date-cell{position:relative;white-space:nowrap;padding:6px 8px!important}
-input.dt{
-  border:1px solid transparent;
-  background:transparent;
-  color:var(--ink);
-  font:inherit;
-  font-weight:600;
-  padding:4px 6px;
-  border-radius:6px;
-  width:100%;
-  max-width:130px;
-  min-height:32px;
-  cursor:pointer;
-  -webkit-appearance:none;
-  appearance:none;
-}
+input.dt{border:1px solid transparent;background:transparent;color:var(--ink);font:inherit;font-weight:600;padding:4px 6px;border-radius:6px;width:100%;max-width:130px;min-height:32px;cursor:pointer;-webkit-appearance:none;appearance:none}
 input.dt:hover{background:#eef2ff;border-color:var(--line)}
 input.dt:focus{outline:none;border-color:var(--pri);background:#fff;box-shadow:0 0 0 3px rgba(29,78,216,.18)}
 .date-cell .ovr{color:var(--pri);font-size:11px;margin-left:2px}
-
 .st-ok { font-size: 11px; color: var(--ok); font-weight: 700; margin-top: 2px; }
 .st-bad { font-size: 11px; color: var(--bad); font-weight: 700; margin-top: 2px; }
 .st-warn { font-size: 11px; color: var(--warn); font-weight: 700; margin-top: 2px; }
 .st-mute { font-size: 11px; color: var(--mute); margin-top: 2px; }
 
-.mark-btn{
-  background:transparent;
-  border:1.5px solid var(--line);
-  border-radius:6px;
-  width:30px;height:30px;
-  cursor:pointer;
-  font-size:15px;line-height:1;
-  color:var(--mute);
-  padding:0;
-  font-family:inherit;
-  transition:all .15s ease;
-}
+.mark-btn{background:transparent;border:1.5px solid var(--line);border-radius:6px;width:30px;height:30px;cursor:pointer;font-size:15px;line-height:1;color:var(--mute);padding:0;font-family:inherit;transition:all .15s ease}
 .mark-btn:hover{border-color:var(--pri);color:var(--pri);background:#eef2ff}
 .mark-btn.active{background:var(--ok);color:#fff;border-color:var(--ok)}
 .col-mark{width:44px;text-align:center}
 
-.wa-float{
-  position:fixed;
-  right:16px;
-  bottom:90px;
-  width:56px;height:56px;
-  background:var(--wa);
-  border-radius:50%;
-  display:flex;align-items:center;justify-content:center;
-  box-shadow:0 6px 16px rgba(37,211,102,.4), 0 2px 6px rgba(0,0,0,.15);
-  z-index:50;
-  text-decoration:none;
-  transition:transform .15s ease, box-shadow .15s ease;
-}
+.wa-float{position:fixed;right:16px;bottom:90px;width:56px;height:56px;background:var(--wa);border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 16px rgba(37,211,102,.4), 0 2px 6px rgba(0,0,0,.15);z-index:50;text-decoration:none;transition:transform .15s ease, box-shadow .15s ease}
 .wa-float:hover{transform:scale(1.08);box-shadow:0 8px 20px rgba(37,211,102,.55), 0 3px 8px rgba(0,0,0,.2)}
 .wa-float:active{transform:scale(.96)}
-.wa-float .tip{
-  position:absolute;right:66px;top:50%;transform:translateY(-50%);
-  background:#0f172a;color:#fff;font-size:12px;font-weight:600;
-  padding:6px 10px;border-radius:8px;white-space:nowrap;
-  opacity:0;pointer-events:none;transition:opacity .15s ease;
-}
+.wa-float .tip{position:absolute;right:66px;top:50%;transform:translateY(-50%);background:#0f172a;color:#fff;font-size:12px;font-weight:600;padding:6px 10px;border-radius:8px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .15s ease}
 .wa-float:hover .tip{opacity:1}
 
-@media(min-width:900px){
-  body{padding-bottom:20px}
-  nav.tabs{display:flex}
-  nav.bottom{display:none}
-  .wa-float{bottom:20px;right:20px}
-}
-@media(max-width:600px){
-  main{padding:10px}
-  h2{font-size:18px}
-  header.top b{font-size:15px}
-  table{font-size:12px;min-width:760px}
-  input.dt{max-width:110px;font-size:12px}
-  .wa-float{width:52px;height:52px;right:14px;bottom:86px}
-  .wa-float .tip{display:none}
-}
+@media(min-width:900px){body{padding-bottom:20px}nav.tabs{display:flex}nav.bottom{display:none}.wa-float{bottom:20px;right:20px}}
+@media(max-width:600px){main{padding:10px}h2{font-size:18px}header.top b{font-size:15px}table{font-size:12px;min-width:760px}input.dt{max-width:110px;font-size:12px}.wa-float{width:52px;height:52px;right:14px;bottom:86px}.wa-float .tip{display:none}}
 </style>
 </head>
 <body>
@@ -264,14 +200,81 @@ input.dt:focus{outline:none;border-color:var(--pri);background:#fff;box-shadow:0
   </div>
 </section>
 
+<!-- 14. ИИ-АГЕНТЫ (НОВАЯ ВКЛАДКА) -->
+<section id="s14">
+  <h2>🤖 ИИ-агенты для бухгалтера</h2>
+  <p class="small mute">Проверенные решения для автоматизации рутины на базе 1С и ERP. Все продукты подтверждены по открытым источникам.</p>
+
+  <h3>Встроенные и сертифицированные решения от «1С»</h3>
+  <details open>
+    <summary>1С:РПД (Распознавание первичных документов)</summary>
+    <div class="kv"><span class="k">Тип</span><b>Облачный сервис, встроен в 1С</b></div>
+    <div class="kv"><span class="k">Функция</span><b>Распознавание сканов, фото, PDF (счета, УПД, акты) и создание черновиков в 1С[reference:8]</b></div>
+    <div class="kv"><span class="k">Конфигурации</span><b>Бухгалтерия, УНФ[reference:9]</b></div>
+    <p class="small">Самый безопасный и простой старт. Требуется интернет и официальная поддержка 1С.</p>
+  </details>
+  <details>
+    <summary>BuhGPT (для Казахстана)</summary>
+    <div class="kv"><span class="k">Тип</span><b>Расширение для «1С:Бухгалтерия для Казахстана»</b></div>
+    <div class="kv"><span class="k">Статус</span><b>Сертификат «1С:Совместимо»[reference:10]</b></div>
+    <div class="kv"><span class="k">Функция</span><b>AI-ассистент для ответов по бухучёту и законодательству РК[reference:11]</b></div>
+  </details>
+
+  <h3>Специализированные агенты для финансовой функции</h3>
+  <details>
+    <summary>ROBIN (цифровые сотрудники)</summary>
+    <div class="kv"><span class="k">Тип</span><b>Платформа RPA + ИИ</b></div>
+    <div class="kv"><span class="k">Агенты</span><b>«Цифровой бухгалтер», «Мастер сверки», «Финансовый цензор» и др.[reference:12]</b></div>
+    <div class="kv"><span class="k">Интеграция</span><b>1С, SAP, банк-клиенты[reference:13]</b></div>
+  </details>
+  <details>
+    <summary>Axis AI (Казахстан)</summary>
+    <div class="kv"><span class="k">Тип</span><b>Сервис для проверки бухгалтерских баз 1С</b></div>
+    <div class="kv"><span class="k">Функция</span><b>Автоматизированная проверка участков учёта и формирование отчётов[reference:14]</b></div>
+    <p class="small">Проверка, занимающая у бухгалтера 4 часа, выполняется системой за ~2,5 минуты[reference:15].</p>
+  </details>
+  <details>
+    <summary>GPTZator</summary>
+    <div class="kv"><span class="k">Тип</span><b>ИИ-платформа для бизнеса</b></div>
+    <div class="kv"><span class="k">Функция</span><b>Ассистент для работы с налоговыми запросами, интеграция с 1С:ERP[reference:16]</b></div>
+    <div class="kv"><span class="k">Статус</span><b>«1С:Совместимо»[reference:17]</b></div>
+  </details>
+
+  <h3>Внешние нейросети (GigaChat, YandexGPT) через API</h3>
+  <details>
+    <summary>GigaChat (Сбер)</summary>
+    <div class="kv"><span class="k">Тип</span><b>Интеграция через API / расширения</b></div>
+    <div class="kv"><span class="k">Функция</span><b>Автоматический разбор платежей, заполнение заказов покупателей в 1С:ERP</b></div>
+  </details>
+  <details>
+    <summary>YandexGPT (Яндекс)</summary>
+    <div class="kv"><span class="k">Тип</span><b>Интеграция через API / обработки</b></div>
+    <div class="kv"><span class="k">Функция</span><b>Сверка контрагентов, анализ данных, работа с базой 1С</b></div>
+  </details>
+
+  <h3>Open-Source решение</h3>
+  <details>
+    <summary>1C AI Agent</summary>
+    <div class="kv"><span class="k">Тип</span><b>Открытый исходный код (GitHub)</b></div>
+    <div class="kv"><span class="k">Функция</span><b>Распознавание документов и создание черновиков в 1С (БП, УНФ)[reference:20]</b></div>
+    <p class="small">Гибкий инструмент для кастомизации под конкретные задачи.</p>
+  </details>
+
+  <h3>С чего начать?</h3>
+  <div class="card">
+    <ul>
+      <li><b>Для быстрого старта без рисков:</b> включите «1С:РПД» для автоматизации ввода первички.</li>
+      <li><b>Для проверки своей базы (особенно в РК):</b> присмотритесь к Axis AI или BuhGPT.</li>
+      <li><b>Для глубокой кастомизации:</b> используйте 1C AI Agent или подключите GigaChat/YandexGPT через коннекторы.</li>
+    </ul>
+  </div>
+</section>
+
 </main>
 
 <!-- Плавающая кнопка WhatsApp -->
 <a href="https://wa.me/77777717707?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%20%D0%98%D0%BD%D1%82%D0%B5%D1%80%D0%B5%D1%81%D1%83%D0%B5%D1%82%20%D0%BA%D0%BE%D0%BD%D1%81%D1%83%D0%BB%D1%8C%D1%82%D0%B0%D1%86%D0%B8%D1%8F%20%D0%BF%D0%BE%20%D1%81%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D1%8E%20%D1%81%D0%B0%D0%B9%D1%82%D0%B0"
-   class="wa-float"
-   target="_blank"
-   rel="noopener noreferrer"
-   aria-label="Написать в WhatsApp">
+   class="wa-float" target="_blank" rel="noopener noreferrer" aria-label="Написать в WhatsApp">
   <span class="tip">Написать в WhatsApp</span>
   <svg viewBox="0 0 32 32" width="30" height="30" fill="#fff" aria-hidden="true">
     <path d="M16 2.6C8.6 2.6 2.6 8.6 2.6 16c0 2.6.7 5.1 2 7.3L2.6 29.4l6.3-1.6c2.1 1.1 4.5 1.8 7.1 1.8 7.4 0 13.4-6 13.4-13.4S23.4 2.6 16 2.6zm0 24.3c-2.3 0-4.4-.6-6.2-1.7l-.4-.3-3.7 1 1-3.6-.3-.4c-1.1-1.9-1.7-4-1.7-6.3 0-6.6 5.3-11.9 11.9-11.9 3.2 0 6.2 1.2 8.4 3.5 2.3 2.3 3.5 5.3 3.5 8.4 0 6.6-5.3 11.9-11.9 11.9zm6.5-8.9c-.4-.2-2.1-1-2.4-1.2-.3-.1-.5-.2-.7.2-.2.4-.8 1-1 1.2-.2.2-.4.2-.7.1-.4-.2-1.5-.5-2.8-1.7-1-.9-1.7-2-1.9-2.4-.2-.4 0-.6.2-.8.2-.2.4-.5.6-.7.2-.2.2-.4.3-.6.1-.2 0-.4 0-.6 0-.2-.7-1.7-.9-2.3-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1 2.9 1.2 3.1c.2.2 2.1 3.2 5 4.4.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 2.1-.8 2.4-1.6.3-.8.3-1.5.2-1.6-.1-.2-.3-.3-.6-.4z"/>
@@ -294,7 +297,8 @@ const TABS=[
   {id:'s10',label:'Допущения',icon:'ℹ️'},
   {id:'s11',label:'1С → ИСНА',icon:'🔄'},
   {id:'s12',label:'Очистка текста',icon:'🧹'},
-  {id:'s13',label:'Произв. календарь',icon:'🗓️'}
+  {id:'s13',label:'Произв. календарь',icon:'🗓️'},
+  {id:'s14',label:'ИИ-агенты',icon:'🤖'}
 ];
 
 const topTabs=document.getElementById('topTabs');
@@ -315,9 +319,9 @@ TABS.slice(0,5).forEach((t,i)=>{
 const moreBtn=document.createElement('button');
 moreBtn.innerHTML='<i>⋯</i>Ещё';
 moreBtn.onclick=()=>{
-  const id=prompt('Введите номер вкладки (6-13):\n6. Учредителю\n7. Учётная политика\n8. Закрытие\n9. Риски\n10. Допущения\n11. 1С → ИСНА\n12. Очистка текста\n13. Производственный календарь');
+  const id=prompt('Введите номер вкладки (6-14):\n6. Учредителю\n7. Учётная политика\n8. Закрытие\n9. Риски\n10. Допущения\n11. 1С → ИСНА\n12. Очистка текста\n13. Производственный календарь\n14. ИИ-агенты');
   const n=parseInt(id);
-  if(n>=6&&n<=13)switchTab('s'+n);
+  if(n>=6&&n<=14)switchTab('s'+n);
 };
 bottomNav.appendChild(moreBtn);
 
@@ -534,15 +538,9 @@ function resetOverrides(){
   renderCal();
 }
 
-// === ИСПРАВЛЕННЫЙ ЭКСПОРТ ===
-function base64Encode(str) {
-  return btoa(unescape(encodeURIComponent(str)));
-}
-
+// === ЭКСПОРТ (BLOB) ===
 function getExportTableHtml(){
   const clone = document.getElementById('calTable').cloneNode(true);
-  
-  // Заменяем ячейки с датами и статусами на чистый текст
   clone.querySelectorAll('.date-cell').forEach(td => {
     const inp = td.querySelector('input.dt');
     const div = td.querySelector('div');
@@ -558,8 +556,6 @@ function getExportTableHtml(){
     }
     td.innerHTML = txt;
   });
-  
-  // Убираем лишние элементы
   clone.querySelectorAll('.tag').forEach(t=>{
     t.replaceWith(document.createTextNode(' ['+t.textContent+']'));
   });
@@ -569,7 +565,6 @@ function getExportTableHtml(){
     const td = btn.closest('td');
     if(td) td.remove();
   });
-  
   return clone.outerHTML;
 }
 
@@ -579,11 +574,15 @@ function exportExcel(){
     '<h2>Налоговый календарь 2026 — ТОО на ОУР + НДС</h2>'+
     '<p style="font-size:9pt;color:#555">Скачано: '+new Date().toLocaleString('ru-RU')+'</p>'+
     tbl+'</body></html>';
-  
+  const blob = new Blob(['\ufeff' + html], {type: 'application/vnd.ms-excel;charset=utf-8'});
+  const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
-  a.href = 'data:application/vnd.ms-excel;base64,' + base64Encode(html);
+  a.href = url;
   a.download = 'calendar_2026.xls';
+  document.body.appendChild(a);
   a.click();
+  document.body.removeChild(a);
+  setTimeout(()=>URL.revokeObjectURL(url), 1000);
 }
 
 function exportWord(){
@@ -592,11 +591,15 @@ function exportWord(){
     '<h2>Налоговый календарь 2026 — ТОО на ОУР + НДС</h2>'+
     '<p style="font-size:9pt;color:#555">Скачано: '+new Date().toLocaleString('ru-RU')+'</p>'+
     tbl+'</body></html>';
-  
+  const blob = new Blob(['\ufeff' + html], {type: 'application/msword;charset=utf-8'});
+  const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
-  a.href = 'data:application/msword;base64,' + base64Encode(html);
+  a.href = url;
   a.download = 'calendar_2026.doc';
+  document.body.appendChild(a);
   a.click();
+  document.body.removeChild(a);
+  setTimeout(()=>URL.revokeObjectURL(url), 1000);
 }
 
 renderCal();
